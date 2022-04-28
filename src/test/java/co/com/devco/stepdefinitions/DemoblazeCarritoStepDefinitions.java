@@ -67,18 +67,33 @@ public class DemoblazeCarritoStepDefinitions {
 
     }
 
-    //        eliminar el samsung
-
 
     @Cuando("elimina el {string}")
-    public void EliminarObjetoDelCarrito(String producto) {
+    public void eliminarObjetoDelCarrito(String producto) {
         theActorInTheSpotlight().attemptsTo(
                 EliminarDelCarrito.elProducto(producto)
 
         );
     }
 
-    //        assert nexus
+    @Cuando("{string} agrega {string} {string} al carrito")
+    public void agregarVariosObjetosDelMismoTipo(String actor,String cantidad,String producto){
+        theActorCalled(actor).attemptsTo(
+                AbrirPagina.enElNavegador(),
+                AgregarProductosDelMismoTipo.alCarrito(cantidad,producto)
+        );
+    }
+
+    @Entonces("debe ver {string} elementos de {string}")
+    public void verificaCantidadElementosDelMismoTipo(String cantidad, String producto) {
+
+        theActorInTheSpotlight().attemptsTo(
+
+                Ensure.that(PRODUCTOS_CARRITO_TIPO.of(producto)).values().hasSize(Integer.parseInt(cantidad))
+
+        );
+
+    }
 
 
 }

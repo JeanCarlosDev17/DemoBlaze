@@ -7,6 +7,4 @@ import org.openqa.selenium.Alert;
 public class DemoblazeDetalleProductoPage {
 	public static final Target BOTON_AGREGAR_CARRITO = Target.the("Boton agregar carrito").located(By.xpath("//a[text()='Add to cart']"));
 
-
-
 }
