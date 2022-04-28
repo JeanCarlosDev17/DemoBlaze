@@ -1,5 +1,6 @@
 package co.com.devco.stepdefinitions;
 
+import co.com.devco.tasks.AbrirPagina;
 import co.com.devco.tasks.AgregarAlCarrito;
 import co.com.devco.tasks.LimpiarCarrito;
 import co.com.devco.tasks.Loguearse;
@@ -20,6 +21,7 @@ public class DemoblazeCarritoStepDefinitions {
     @Dado("que {string} se loguea como {string}")
     public void loguin(String actor, String rol) {
         theActorCalled(actor).attemptsTo(
+                AbrirPagina.enElNavegador(),
                 Loguearse.como(rol),
                 LimpiarCarrito.completamente()
         );
@@ -43,18 +45,17 @@ public class DemoblazeCarritoStepDefinitions {
     //    hasta aqui funciona
 
 
+    @Cuando("{string} agrega el {string} al carrito vacio")
+    public void agregarObjetoEjemploAlCarrito(String actor, String producto) {
+        // Write code here that turns the phrase above into concrete actions
+        theActorCalled(actor).attemptsTo(
+                AbrirPagina.enElNavegador(),
+                LimpiarCarrito.completamente(),
+                AgregarAlCarrito.elProducto(producto)
+        );
 
 
-//    @Cuando("{string} agrega el {string} al carrito vacio")
-//    public void agregarObjetoEjemploAlCarrito(String actor, String producto) {
-//        // Write code here that turns the phrase above into concrete actions
-//        theActorCalled(actor).attemptsTo(
-//                LimpiarCarrito.completamente(),
-//                AgregarAlCarrito.elProducto(producto)
-//        );
-//
-//
-//    }
+    }
 
 
 

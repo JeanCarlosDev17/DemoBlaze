@@ -12,25 +12,17 @@ import static co.com.devco.userinterfaces.DemoblazeIndexPage.LINK_LOGIN;
 import static co.com.devco.userinterfaces.DemoblazeLoginPage.*;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 
-public class Loguearse implements Task {
-    private String rol;
+public class AbrirPagina implements Task {
 
-    public Loguearse(String rol) {
-        this.rol = rol;
-    }
 
-    public static Performable como(String rol) {
-        return instrumented(Loguearse.class, rol);
+    public static Performable enElNavegador()  {
+        return instrumented(AbrirPagina.class);
     }
 
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
-
-                Click.on(LINK_LOGIN),
-                Enter.theValue(UsuarioFactory.delRol(rol).getUsuario()).into(TEXT_USUARIO),
-                Enter.theValue(UsuarioFactory.delRol(rol).getPassword()).into(TEXT_CONTRASENA),
-                Click.on(BOTON_LOGIN)
+                Open.url("https://www.demoblaze.com/#")
         );
     }
 }
