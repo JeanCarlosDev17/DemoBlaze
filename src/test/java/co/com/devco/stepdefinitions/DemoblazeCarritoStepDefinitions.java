@@ -1,9 +1,6 @@
 package co.com.devco.stepdefinitions;
 
-import co.com.devco.tasks.AbrirPagina;
-import co.com.devco.tasks.AgregarAlCarrito;
-import co.com.devco.tasks.LimpiarCarrito;
-import co.com.devco.tasks.Loguearse;
+import co.com.devco.tasks.*;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;
 import io.cucumber.java.es.Entonces;
@@ -30,7 +27,8 @@ public class DemoblazeCarritoStepDefinitions {
     @Cuando("agrega el {string} al carrito vacio")
     public void agregarObjetoAlCarrito(String producto) {
         theActorInTheSpotlight().attemptsTo(
-                AgregarAlCarrito.elProducto(producto)
+                AgregarAlCarrito.elProducto(producto),
+                IrAlCarrito.enElNavegador()
         );
     }
 
@@ -51,14 +49,36 @@ public class DemoblazeCarritoStepDefinitions {
         theActorCalled(actor).attemptsTo(
                 AbrirPagina.enElNavegador(),
                 LimpiarCarrito.completamente(),
-                AgregarAlCarrito.elProducto(producto)
+                AgregarAlCarrito.elProducto(producto),
+                IrAlCarrito.enElNavegador()
         );
+    }
 
+    @Dado("{string} agrega {string} y {string} al carrito vacio")
+    public void agregarDosProductosDistintos(String actor, String producto1, String producto2) {
+        theActorCalled(actor).attemptsTo(
+                AbrirPagina.enElNavegador(),
+                LimpiarCarrito.completamente(),
+                AgregarAlCarrito.elProducto(producto1),
+                IrAlHome.enElNavegador(),
+                AgregarAlCarrito.elProducto(producto2),
+                IrAlCarrito.enElNavegador()
+        );
 
     }
 
+    //        eliminar el samsung
 
 
+    @Cuando("elimina el {string}")
+    public void EliminarObjetoDelCarrito(String producto) {
+        theActorInTheSpotlight().attemptsTo(
+                EliminarDelCarrito.elProducto(producto)
+
+        );
+    }
+
+    //        assert nexus
 
 
 }
